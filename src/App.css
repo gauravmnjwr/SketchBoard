@@ -1,0 +1,33 @@
+#edit-list {
+  background-color: #b1b9c7;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+body {
+  margin: 0;
+}
+
+img {
+  height: 20px;
+}
+
+/* 
+#color-list {
+  list-style-type: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid wheat;
+}
+
+#color-list li {
+  width: 60%;
+  height: 50px;
+  color: black;
+  display: inline;
+  margin: 0px 10px;
+  background-color: #b7ccf5;
+  min-width: 30px;
+} */
