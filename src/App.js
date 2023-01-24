@@ -7,6 +7,7 @@ function App() {
 
   const [color, setColor] = useState('#0052cc');
   const [size, setSize] = useState(3);
+  const [erase, setErase] = useState({ size: 0, canErase: false });
 
   useEffect(() => {
     canvas = new fabric.Canvas("canvas");
@@ -26,6 +27,13 @@ function App() {
 
   }, [color, size]);
 
+  useEffect(() => {
+    if (erase.canErase) {
+      canvas.freeDrawingBrush.width = erase.size;
+    }
+
+  }, [erase]);
+
 
   const handleColor = (color) => {
     console.log(color)
@@ -33,6 +41,9 @@ function App() {
   }
   const handleChange = (event) => {
     console.log(event.target.value)
+    if (erase.canErase) {
+      setErase({ ...erase, canErase: false });
+    }
     switch (event.target.value) {
       case '1':
         setSize(8);
@@ -60,27 +71,80 @@ function App() {
     }
   }
   const handleEraser = () => {
-    canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+    const temp = !(erase.canErase);
+    setErase({ ...erase, canErase: temp });
+    if (erase.canErase) {
+      canvas.freeDrawingBrush.color = color;
+      canvas.freeDrawingBrush.width = size;
+    }
+    else {
+      canvas.freeDrawingBrush.color = 'white';
+      canvas.freeDrawingBrush.width = erase.size;
+    }
+  }
 
-    canvas.isDrawingMode = true;
+  const handleEraserChange = (event) => {
+    console.log(event.target.value)
+    switch (event.target.value) {
+      case '1':
+        setErase({ ...erase, size: 15 });
+
+        return;
+      case '2':
+        setErase({ ...erase, size: 20 });
+
+        return;
+
+      case '3':
+        setErase({ ...erase, size: 30 });
+        return;
+
+      case '4':
+        setErase({ ...erase, size: 35 });
+        return;
+
+      case '5':
+        setErase({ ...erase, size: 45 });
+        return;
+
+      default:
+        setErase({ ...erase, size: 8 });
+        return;
+    }
+
+
   }
 
   return (
     <>
       <div id="edit-list">
-        <ul id="color-list">
-          <li onClick={() => handleColor('green')}>G</li>
-          <li onClick={() => handleColor('black')}>B</li>
-          <li onClick={() => handleColor('red')}>R</li>
-        </ul>
-        <input
-          id="rangeinp"
-          type="range"
-          min="0" max="5"
-          onChange={handleChange}
-          defaultValue="0"
-          step="1" />
-        <img src="https://cdn-icons-png.flaticon.com/512/2661/2661282.png" alt="eraser" onClick={handleEraser} />
+        <div id="colorlist-container">
+          <ul id="color-list">
+            <li onClick={() => handleColor('green')}>G</li>
+            <li onClick={() => handleColor('black')}>B</li>
+            <li onClick={() => handleColor('red')}>R</li>
+          </ul>
+        </div>
+        <div id="pensize-container">
+          <label htmlFor="rangeinp">Size</label>
+          <input
+            id="rangeinp"
+            type="range"
+            min="0" max="5"
+            onChange={handleChange}
+            defaultValue="0"
+            step="1" />
+        </div>
+        <div id="eraser-container">
+          <label htmlFor="rangeinp">Size</label>
+          <input type="range"
+            id="rangeinp"
+            min="0" max="5"
+            defaultValue="0"
+            step="1"
+            onChange={handleEraserChange} />
+          <img src="https://cdn-icons-png.flaticon.com/512/2661/2661282.png" alt="eraser" onClick={handleEraser} />
+        </div>
       </div>
       <canvas id="canvas" />
     </>
