@@ -1,14 +1,17 @@
 #edit-list {
-  background-color: #b1b9c7;
+  margin-top: 20px;
+  background-color: #fafafc;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
 
 #edit-list div {
   /* width: 100%; */
-  border: 1px solid black;
 }
 
 body {
@@ -19,20 +22,77 @@ img {
   height: 20px;
 }
 
-/* 
 #color-list {
-  list-style-type: none;
-  width: 20px;
-  height: 20px;
-  border: 1px solid wheat;
+  display: flex;
+  flex-direction: row;
+  border: 0px;
+  height: 30px;
+  width: 16%;
+  text-align: center;
 }
 
-#color-list li {
-  width: 60%;
-  height: 50px;
-  color: black;
-  display: inline;
-  margin: 0px 10px;
-  background-color: #b7ccf5;
+#color-list div {
+  height: 30px;
+  width: 30px;
+  border-radius: 20px;
+  margin-left: 5px;
+  min-height: 30px;
   min-width: 30px;
-} */
+
+}
+
+#blue {
+  background-color: #0052cc;
+}
+
+#yellow {
+  background-color: yellow;
+}
+
+#green {
+  background-color: green;
+}
+
+#red {
+  background-color: red;
+}
+
+#black {
+  background-color: black;
+}
+
+div>img {
+  border: 1px solid white;
+  border-radius: 25%;
+  background-color: gainsboro;
+
+}
+
+label>img {
+  border: 1px solid white;
+  border-radius: 25%;
+}
+
+label>img:hover {
+  -webkit-box-shadow: 0 0 10px #fff;
+  box-shadow: 0 0 10px #fff;
+}
+
+button {
+  background-color: white;
+  opacity: 0.6;
+  border: 0.1px solid black;
+  text-align: center;
+  padding: 5px;
+  width: 34px;
+  margin-left: 3px;
+
+}
+
+#shape-container {
+  width: 150px;
+}
+
+button:hover {
+  opacity: 1
+}
