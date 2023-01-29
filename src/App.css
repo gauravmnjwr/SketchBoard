@@ -136,6 +136,8 @@ input {
   text-align: center;
   align-self: baseline;
   margin-left: -10px;
+  accent-color: black;
+
 }
 
 button,
