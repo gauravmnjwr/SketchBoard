@@ -5,6 +5,7 @@ A web whiteboard using React and [Fabric.js](http://fabricjs.com/articles/) on w
 3. Add Shapes
 4. Pan shapes and curves
 
+# The site is deployed on - https://scintillating-fairy-385c39.netlify.app/
 
 To run it:
 
