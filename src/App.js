@@ -2,6 +2,7 @@ import "./App.css";
 import { useEffect, useState, useRef } from "react";
 import { fabric } from "fabric";
 
+
 let canvas = '';
 function App() {
 
@@ -9,11 +10,12 @@ function App() {
   const [size, setSize] = useState(3);
   const [erase, setErase] = useState({ size: 3, canErase: false });
 
+
   const node = useRef([]);
 
   useEffect(() => {
     canvas = new fabric.Canvas("canvas");
-    canvas.setHeight(window.innerHeight);
+    canvas.setHeight(window.innerHeight - 95);
     canvas.setWidth(window.innerWidth);
     canvas.isDrawingMode = true;
     canvas.freeDrawingBrush.width = size;
@@ -25,7 +27,6 @@ function App() {
   useEffect(() => {
     canvas.freeDrawingBrush.color = color;
     canvas.freeDrawingBrush.width = size;
-    console.log(size);
 
   }, [color, size]);
 
@@ -49,7 +50,6 @@ function App() {
     setColor(color);
   }
   const handleChange = (event) => {
-    console.log(event.target.value)
     if (erase.canErase) {
       setErase({ ...erase, canErase: false });
     }
@@ -105,7 +105,6 @@ function App() {
   }
 
   const handleEraserChange = (event) => {
-    console.log(event.target.value);
     switch (event.target.value) {
       case '1':
         setErase({ ...erase, size: 15 });
@@ -212,10 +211,6 @@ function App() {
   }
   const handleTraingle = () => {
 
-    var w = window.innerWidth;
-    var h = window.innerHeight;
-    var center = { x: w / 2, y: h / 2 };
-    console.log(center)
     var triangle = new fabric.Triangle({
       width: 150,
       height: 75,
@@ -247,28 +242,20 @@ function App() {
     var pentagon = new fabric.Polygon([
       { x: 200, y: 10 },
       { x: 250, y: 50 },
-      { x: 250, y: 100 },
-      { x: 150, y: 100 },
+      { x: 230, y: 100 },
+      { x: 170, y: 100 },
       { x: 150, y: 50 }], {
       fill: '',
-      strokeWidth: 10,
+      strokeWidth: 1,
       stroke: 'black',
 
     })
-
     canvas.add(pentagon)
   }
 
   const handleDrawingMode = (event) => {
     canvas.isDrawingMode = !(canvas.isDrawingMode);
-    if (event.target.style.backgroundColor === 'orange') {
-      event.target.style.backgroundColor = '';
-    }
-    else {
-      event.target.style.backgroundColor = 'orange';
-    }
     let objectx = canvas.getObjects();
-    console.log(objectx)
     for (let i = 0; i < objectx.length; i++) {
       if (objectx[i].stroke === 'white') {
         let eraserObj = objectx[i];
@@ -288,11 +275,12 @@ function App() {
     }
   }
 
+
   return (
     <>
       <div id="edit-list">
         <div id="pensize-container">
-          <label htmlFor="rangeinp"><img src="https://cdn-icons-png.flaticon.com/512/1250/1250615.png" alt="" /></label>
+          <label htmlFor="rangeinp"><img id="range-img" src="https://cdn-icons-png.flaticon.com/512/1250/1250615.png" alt="" /></label>
           <input
             id="rangeinp"
             type="range"
@@ -309,7 +297,7 @@ function App() {
           <div ref={(el) => node.current[4] = el} onClick={() => handleColor('green')} id='green'></div>
         </div>
         <div id="eraser-container">
-          <label htmlFor="rangeinp"><img src="https://cdn-icons-png.flaticon.com/512/2661/2661282.png" alt="eraser" onClick={handleEraser} /></label>
+          <label htmlFor="rangeinp"><img id="range-img" src="https://cdn-icons-png.flaticon.com/512/2661/2661282.png" alt="eraser" onClick={handleEraser} /></label>
           <input type="range"
             id="rangeinp"
             min="0" max="5"
@@ -319,7 +307,7 @@ function App() {
 
         </div>
         <div onClick={handleDrawingMode}>
-          <img src="https://cdn-icons-png.flaticon.com/512/827/827980.png" alt="elementselector" />
+          <img id="range-img" src="https://cdn-icons-png.flaticon.com/512/827/827980.png" alt="elementselector" />
         </div>
         <div id="shape-container">
           <button onClick={handleLine}><img src="https://cdn-icons-png.flaticon.com/512/581/581838.png" alt="" /></button>
